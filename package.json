@@ -1,5 +1,5 @@
 {
-  "name": "npi_verify",
+  "name": "npi_validation",
   "version": "1.0.0",
   "description": "verify NPI and Check Digit per CMS Publication for Requirements for National Provider Identifier (NPI) and NPI Check Digit of Jan 23 2004",
   "main": "index.js",
@@ -16,5 +16,18 @@
   "dependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
-  }
+  },
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mckaycr/npi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mckaycr/npi/issues"
+  },
+  "homepage": "https://github.com/mckaycr/npi#readme"
 }
