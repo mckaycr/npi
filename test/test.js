@@ -27,9 +27,7 @@ describe('NPI',function(){
 			it('should return true',function(done){
 				var string='1234567893';
 				var npi = new NPI(string);
-				npi.isValid(function(results){
-					expect(results).to.equal(true)
-				})
+				expect(npi.isValid).to.equal(true)
 				done();
 			})
 		})
@@ -37,9 +35,7 @@ describe('NPI',function(){
 			it('should return true',function(done){
 				var string = '808401234567893'
 				var npi = new NPI(string)
-				npi.isValid(function(results){
-					expect(results).to.equal(true)
-				})
+				expect(npi.isValid).to.equal(true)
 				done();
 			})
 		})
@@ -47,9 +43,7 @@ describe('NPI',function(){
 			it('should be false',function(done){
 				var string='1234567891';
 				var npi = new NPI(string);
-				npi.isValid(function(results){
-					expect(results).to.equal(false)
-				})
+				expect(npi.isValid).to.equal(false)
 				done();				
 			})
 		})

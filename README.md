@@ -9,9 +9,7 @@ var npi = new NPI('1234567893')
 console.log('The raw input is ' + npi.raw)
 console.log('The non check digits are ' +npi.npi)
 console.log('The check digit is '+ npi.checkDigit)
-npi.isValid(function(results){
-    console.log('This NPI is valid: ' + results)
-})
+console.log('The NPI is valid: '+ npi.isValid)
 ```
 
 ## Results
@@ -19,11 +17,8 @@ npi.isValid(function(results){
 The raw input is 1234567893
 The non check digits are 123456789
 The check digit is 3
-This NPI is valid:true
+This NPI is valid: true
 ```
-
-## Methods
-- `isValid(callback)` - For this method a callback is required, and the callback returns a boolean indicating the validity of an NPI.
 
 ## Credit
 

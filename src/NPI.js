@@ -5,12 +5,7 @@ function NPI(string){
 	this.raw = string,
 	this.npi = npi,
 	this.checkDigit = checkDigit,
-	this.isValid = function(callback){
-		var npi = this.npi
-		var sum = sumNPI(npi)+24
-		var checkDigit = (sum*9) % 10
-		callback(this.checkDigit === checkDigit)
-	};
+	this.isValid = (this.checkDigit === (((sumNPI(npi)+24)*9)%10)?true:false)
 	function sumNPI(string){
 		var total = 0
 		var npiArray = string.split('');
