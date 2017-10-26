@@ -1,2 +1,1 @@
-module.exports = require('./lib')
-
+module.exports = require('./src/NPI.js');
