@@ -48,4 +48,18 @@ describe('NPI',function(){
 			})
 		})
 	})
+	describe('cleansing',function(){
+		describe('for any given string',function(){
+			it('should provide an array of possible npi within the string',function(done){
+				var string = 'G456278A12345678935481'
+				var npi = new NPI(string)
+				expect(npi.npis).to.be.an('array')
+				expect(npi.npis[1].raw).to.equal('1234567893')
+				expect(npi.npis[1].isValid).to.equal(true)
+				// expect(npi.npis).to.include('1298657423')
+				// expect(npi.npis).to.include('2986574235')
+				done();
+			})
+		})
+	})
 });
