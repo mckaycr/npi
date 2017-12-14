@@ -1,5 +1,5 @@
 var NPI = require('../src/NPI.js')
-var npi = new NPI('1234567891')
+var npi = new NPI('1134290001')
 console.log(npi)
 console.log('The raw input is ' + npi.raw)
 console.log('The non check digits are ' +npi.npi)

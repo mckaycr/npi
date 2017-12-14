@@ -5,7 +5,7 @@ function NPI(string){
 	this.raw = string,
 	this.npi = npi,
 	this.checkDigit = checkDigit,
-	this.isValid = (this.checkDigit === (((sumNPI(npi)+24)*9)%10)?true:false),
+	this.isValid = ((this.checkDigit === (((sumNPI(npi)+24)*9)%10))&&validate()?true:false),
 	this.npis = (list(string))
 	function sumNPI(string){
 		var total = 0
@@ -31,6 +31,14 @@ function NPI(string){
 		})
 		return total
 	};
+	function validate(){
+		tmp = npi+lastCharacter
+		if(tmp.length==10 && (tmp.substr(0,1)=='1' ||tmp.substr(0,1)=='2')){
+			return true
+		}else{
+			return false
+		}
+	}
 	function list(string){
 		numeric_string = string.replace(/\D/g,'');
 		temp_array = numeric_string.split('');

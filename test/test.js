@@ -47,6 +47,22 @@ describe('NPI',function(){
 				done();				
 			})
 		})
+		describe('for NPI not meeting the length requirements',function(){
+			it('should be false',function(done){
+				var string='860434455';
+				var npi = new NPI(string);
+				expect(npi.isValid).to.equal(false)
+				done();				
+			})
+		})
+		describe('for NPI not starting with 1 or 2',function(){
+			it('should be false',function(done){
+				var string='5171560001';
+				var npi = new NPI(string);
+				expect(npi.isValid).to.equal(false)
+				done();				
+			})
+		})
 	})
 	describe('cleansing',function(){
 		describe('for any given string',function(){
