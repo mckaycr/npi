@@ -1,6 +1,6 @@
 # [NPI](http://mckaycr.github.io/npi)
 
-This project is meant for validating National Provider Identification numbers
+This project is meant for validating National Provider Identification numbers.  It started as just a tool to verify if a 10 digit number was a valid NPI, then became a tool which cleanes and searches any size string for possible NPI.
 
 ## Example
 ```
