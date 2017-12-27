@@ -1,28 +1,81 @@
 function NPI(string){
-	var lastCharacter = string.slice(-1);
+	string = string.replace(/[^\d]/g, '');
+	var lastCharacter = (string.length>=10?string.substr(9,1):string.slice(-1));
 	var checkDigit = Number(lastCharacter);
-	var npi = string.substr(string.length-10,9);
+	var npi = (string.length>=10?string.substr(0,9):string.substr(0,string.length-1));
 	this.raw = string,
 	this.npi = npi,
 	this.checkDigit = checkDigit,
-	this.isValid = ((this.checkDigit === (((sumNPI(npi)+24)*9)%10))&&validate()?true:false),
-	this.npis = (list(string))
-	function sumNPI(string){
+	this.isValid = validation(this.npi, this.checkDigit)
+	this.npis = (string.length>10?list(string):[])
+	// This function looks for possible NPI in the substrings of
+	// original input if the original input is greater than 10 digits.
+	// This I think needs to be refactored, I hate this function.
+	function list(string){
+		temp_array = string.split('');
+		var indices = []
+		var p_npi = []
+		temp_array.forEach(function(i, index){
+			if(i=='1'||i=='2'){
+				indices.push(index)
+				if(index!=0 && string.substr(index,10).length==10){
+					var tmp = string.substr(index,10) 
+					var possible_npi = {
+						raw:tmp,
+						lastCharacter:tmp.substr(9,1),
+						checkDigit:Number(tmp.slice(-1)),
+						npi:tmp.substr(tmp.length-10,9),
+						isValid:validation(tmp.substr(tmp.length-10,9),Number(tmp.slice(-1)),true)
+					}
+					p_npi.push(possible_npi)						
+				}
+			}
+		})
+		return p_npi
+	};	
+	function validation(npi,checkDigit,subSwitch){
+		var string = npi+checkDigit
+		var results = {
+			status:true,
+			descriptions:[]
+		}
+		if(string.length!=10){
+			results.status=false
+			results.descriptions.push('NPI does not meet length requirement. the length is:'+ string.length)
+		}
+		if(npi.substr(0,1)!='1' && npi.substr(0,1)!='2'){
+			results.status = false
+			results.descriptions.push('NPI does not start with 1 or 2. First character is:'+ npi.substr(0,1))
+		}
+		if(checkDigit != luhn(npi)){
+			results.status = false
+			results.descriptions.push('NPI failed Luhn verification check')
+		}
+		if(subSwitch){
+			results.descriptions.push('This NPI is a result of a substring search')
+		}
+		return results
+	}
+	function luhn(string){
 		var total = 0
 		var npiArray = string.split('');
 		npiArray.reverse()
+		var idx = 0
 		npiArray.forEach(function(n){
-			var idx = npiArray.indexOf(n)
+			idx++
+			var num = Number(n)
 			var parity = idx % 2 == 0
 			if(parity){
-				total+= Number(sumDigits(n * 2))
+				total+=num
 			}else{
-				total+=Number(n)
+				total+= digitSum(num * 2)
 			}
 		})
-		return total
+		results = (((total+24)*9)%10)
+		return results
 	};
-	function sumDigits(input){
+
+	function digitSum(input){
 		var tmp = input.toString()
 		var arr = tmp.split('')
 		var total = 0
@@ -30,37 +83,6 @@ function NPI(string){
 			total = Number(total) + Number(n)
 		})
 		return total
-	};
-	function validate(){
-		tmp = npi+lastCharacter
-		if(tmp.length==10 && (tmp.substr(0,1)=='1' ||tmp.substr(0,1)=='2')){
-			return true
-		}else{
-			return false
-		}
-	}
-	function list(string){
-		numeric_string = string.replace(/\D/g,'');
-		temp_array = numeric_string.split('');
-		var indices = []
-		var p_npi = []
-		temp_array.forEach(function(i, index){
-			if(i=='1'||i=='2'){
-				indices.push(index)
-				if(numeric_string.substr(index,10).length==10){
-					tmp = numeric_string.substr(index,10)
-					var possible_npi = {
-						raw:tmp,
-						lastCharacter:tmp.slice(-1),
-						checkDigit:Number(tmp.slice(-1)),
-						npi:tmp.substr(tmp.length-10,9),
-						isValid:(Number(tmp.slice(-1)) === (((sumNPI(tmp.substr(tmp.length-10,9))+24)*9)%10)?true:false)
-					}
-					p_npi.push(possible_npi)
-				}
-			}
-		})
-		return p_npi
 	};
 }
 module.exports = NPI
