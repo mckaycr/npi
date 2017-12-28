@@ -9,13 +9,8 @@ var npi = new NPI('1234567893')
 console.log('The raw input is ' + npi.raw)
 console.log('The non check digits are ' +npi.npi)
 console.log('The check digit is '+ npi.checkDigit)
-console.log('The NPI is valid: '+ npi.isValid.status)
+console.log('The NPI is valid: '+ npi.isValid)
 ```
-
-isValid has two properties:
-- status : boolean indicating the validity of the NPI
-- descriptions : an array of messages indicating why an NPI is not valid
-    + In cases where an NPI was found to be a substring of the original input, and the NPI passes validation checks, a description is provided which indicates that the NPI found was a result of a substring search.
 
 ## Results
 ```
