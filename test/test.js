@@ -1,5 +1,5 @@
 var expect = require("chai").expect;
-var NPI = require('../src/NPI.js');
+var NPI = require('../src/npi.js');
 
 describe('NPI',function(){
 	describe('instantiation',function(){
