@@ -9,7 +9,7 @@ function NPI(string){
 	this.checkDigit = checkDigit,
 	this.isValid = isValid.status
 	this.npis = (cleaned.length>10?list(cleaned):[])
-	this.msg = isValid.descriptions
+	this.errorsls = isValid.descriptions
 	// This function looks for possible NPI in the substrings of
 	// original input if the original input is greater than 10 digits.
 	// This I think needs to be refactored, I hate this function.
