@@ -1,32 +1,36 @@
 function NPI(string){
-	string = string.replace(/[^\d]/g, '');
-	var lastCharacter = (string.length>=10?string.substr(9,1):string.slice(-1));
+	cleaned = string.replace(/[^\d]/g, '');
+	var lastCharacter = (cleaned.length>=10?cleaned.substr(9,1):cleaned.slice(-1));
 	var checkDigit = Number(lastCharacter);
-	var npi = (string.length>=10?string.substr(0,9):string.substr(0,string.length-1));
-	this.raw = string,
+	var npi = (cleaned.length>=10?cleaned.substr(0,9):cleaned.substr(0,cleaned.length-1));
+	var isValid = validation(npi, checkDigit)
+	this.raw = cleaned,
 	this.npi = npi,
 	this.checkDigit = checkDigit,
-	this.isValid = validation(this.npi, this.checkDigit)
-	this.npis = (string.length>10?list(string):[])
+	this.isValid = isValid.status
+	this.npis = (cleaned.length>10?list(cleaned):[])
+	this.msg = isValid.descriptions
 	// This function looks for possible NPI in the substrings of
 	// original input if the original input is greater than 10 digits.
 	// This I think needs to be refactored, I hate this function.
 	function list(string){
 		temp_array = string.split('');
-		var indices = []
-		var p_npi = []
+		var indices = [];
+		var p_npi = [];
 		temp_array.forEach(function(i, index){
 			if(i=='1'||i=='2'){
 				indices.push(index)
 				if(index!=0 && string.substr(index,10).length==10){
-					var tmp = string.substr(index,10) 
+					var tmp = string.substr(index,10);
+					var isValid = validation(tmp.substr(tmp.length-10,9),Number(tmp.slice(-1)),true)
 					var possible_npi = {
 						raw:tmp,
 						lastCharacter:tmp.substr(9,1),
 						checkDigit:Number(tmp.slice(-1)),
 						npi:tmp.substr(tmp.length-10,9),
-						isValid:validation(tmp.substr(tmp.length-10,9),Number(tmp.slice(-1)),true)
-					}
+						isValid: isValid.status,
+						msg:isValid.descriptions
+					};
 					p_npi.push(possible_npi)						
 				}
 			}
