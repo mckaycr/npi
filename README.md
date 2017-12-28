@@ -3,9 +3,9 @@ This project is meant for validating National Provider Identification numbers.  
 ## Verification
 This module will verify the following things, after it has cleansed the input of all non-numeric characters according to the [Requirements for National Provider Identifiers](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)
 
-    - The NPI must be 10 characters in length
-    - The NPI must only start with a 1 or 2
-    - The NPI must match its check digit
+- The NPI must be 10 characters in length
+- The NPI must only start with a 1 or 2
+- The NPI must match its check digit
 ## Properties
 - `raw`: a string that represents the value being verified.  This value has been cleansed of any non-numeric characters.
 - `npi`: a string that represents the NPI portion of the input.  In otherwords, the first 9 digits of the 10 digit NPI.
