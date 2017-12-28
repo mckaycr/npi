@@ -2,6 +2,7 @@
 This project is meant for validating National Provider Identification numbers.  It started as just a tool to verify if a 10 digit number was a valid NPI, then became a tool which cleans and searches any size string for possible NPI.
 ## Verification
 This module will verify the following things, after it has cleansed the input of all non-numeric characters according to the [Requirements for National Provider Identifiers](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)
+
     - The NPI must be 10 characters in length
     - The NPI must only start with a 1 or 2
     - The NPI must match its check digit
